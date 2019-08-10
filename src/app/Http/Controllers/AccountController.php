@@ -37,7 +37,7 @@ class AccountController extends Controller
     {
         //
         $rules = [
-            'full_name' => 'required|string',
+            'fullName' => 'required|string',
             'nickname' => 'required|string',
             'email' => 'required|email',
             'password' => 'required|string|max:12|min:6'

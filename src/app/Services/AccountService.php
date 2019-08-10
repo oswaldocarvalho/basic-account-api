@@ -31,8 +31,6 @@ class AccountService
 
         DB::commit();
 
-        unset($newRecord->password);
-
         return $newRecord;
     }
 
@@ -40,7 +38,7 @@ class AccountService
     public function signIn(array $data)
     {
         // get user by email
-        $user = UserModel::where('email', $data['email'])->select(['id', 'full_name', 'nickname', 'password', 'token'])->first();
+        $user = UserModel::where('email', $data['email'])->first();
 
         // verify password
         if ($user == null || $user->password != Hash::check($data['password'], $user->password)) {
@@ -50,6 +48,9 @@ class AccountService
         // generate a token
         $user->token = str_random(64);
         $user->save();
+
+        // show token only here
+        $user->addVisible(['token']);
 
         return $user;
     }

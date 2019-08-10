@@ -20,7 +20,7 @@ $router->group(['prefix' => '/'], function () use ($router) {
     $router->group(['prefix' => '/account'], function () use ($router) {
         $router->post('/register', 'AccountController@register');
         $router->post('/sign-in', 'AccountController@signIn');
-        $router->get('/sign-out', ['uses' => 'AccountController@signOut', 'middleware' => 'auth']);
+        $router->delete('/sign-out', ['uses' => 'AccountController@signOut', 'middleware' => 'auth']);
     });
 
     $router->group(['prefix' => '/ranking', 'middleware' => 'auth'], function () use ($router) {

@@ -32,7 +32,7 @@ class UserModel extends Model implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
     protected $fillable = [
-        'full_name',
+        'fullName',
         'nickname',
         'email',
         'password',
@@ -45,10 +45,22 @@ class UserModel extends Model implements AuthenticatableContract, AuthorizableCo
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-        'is_email_verified',
-        'created_at',
-        'updated_at'
+    protected $visible = [
+        'id',
+        'fullName',
+        'nickname',
+        'email'
     ];
+
+    protected $appends = [
+      'fullName'
+    ];
+
+    public function getFullNameAttribute() {
+        return $this->attributes['full_name'];
+    }
+
+    public function setFullNameAttribute(string $fullName) {
+        $this->attributes['full_name'] = $fullName;
+    }
 }

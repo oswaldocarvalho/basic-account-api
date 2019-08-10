@@ -11,8 +11,8 @@ class RankingController extends Controller
     //
     public function index(Request $request, RankingService $rankingService)
     {
-        $ranking = $rankingService->getHighscores(100);
         $me = $rankingService->me(Auth::user());
+        $ranking = $rankingService->getHighscores(100);
 
         return response()->make([
             'me' => $me,
@@ -34,6 +34,6 @@ class RankingController extends Controller
         $user = Auth::user();
         $ranking->insertOrUpdate($user->id, $request->score);
 
-        return response()->make(null, 200);
+        return response()->make(null, 201);
     }
 }
